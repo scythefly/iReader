@@ -60,10 +60,6 @@ class ViewController: NSViewController {
         let data = manager.contents(atPath: path)
         if data != nil {
             bookString = String(data: data!, encoding: encoding)
-            bookString = (bookString as NSString).replacingOccurrences(of: "\n\n", with: "\n")
-            bookString = (bookString as NSString).replacingOccurrences(of: "\n\n", with: "\n")
-            bookString = (bookString as NSString).replacingOccurrences(of: "  ", with: " ")
-            bookString = (bookString as NSString).replacingOccurrences(of: "  ", with: " ")
             pages = bookString.count / chars
             prefs.pages = pages
             fileIsOpen = true
@@ -87,8 +83,9 @@ class ViewController: NSViewController {
             return
         }
         self.offset = page * chars
-        let ct = (bookString as NSString).substring(with: NSMakeRange(self.offset, chars))
-        txtContent.stringValue = ct
+        var txtString: String = (bookString as NSString).substring(with: NSMakeRange(self.offset, chars))
+        txtString = txtString.regReplace(pattern: #"[ \t\r\f\v]+\n"#, with: "\n")
+        txtContent.stringValue = txtString.regReplace(pattern: #"[\n]{2,}"#, with: "\n")
         index = page + 1
         prefs.index = index
     }
@@ -148,5 +145,20 @@ extension ViewController {
                                                object: nil, queue: nil) {
                                                 (notification) in self.updateDisplay()
         }
+    }
+}
+
+extension String {
+    var count: Int {
+        let string_NS = self as NSString
+        return string_NS.length
+    }
+    
+    func regReplace(pattern: String, with: String,
+                     options: NSRegularExpression.Options = []) -> String {
+        let regex = try! NSRegularExpression(pattern: pattern, options: options)
+        return regex.stringByReplacingMatches(in: self, options: [],
+                                              range: NSMakeRange(0, self.count),
+                                              withTemplate: with)
     }
 }
