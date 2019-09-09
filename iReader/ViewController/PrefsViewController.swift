@@ -28,7 +28,12 @@ class PrefsViewController: NSViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleDidChangePreferredTheme(notification:)), name: NSNotification.Name(rawValue: "didChangePreferredTheme"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePreferences(notification:)), name: NSNotification.Name(rawValue: "Preferences..."), object: nil)
         
+//        loadSettings()
+    }
+    
+    @objc func handlePreferences(notification: Notification) {
         loadSettings()
     }
     

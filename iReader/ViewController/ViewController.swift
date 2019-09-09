@@ -18,9 +18,13 @@ class ViewController: NSViewController {
     var index = 0
     var chars = 180
     var offset = 0
+    var columns = 0
+    var rows = 0
     var fileIsOpen: Bool = false
+    var isWindowVisible: Bool = true
     
     var prefs = Preferences()
+    var bookReader = Pages()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,15 +47,42 @@ class ViewController: NSViewController {
         switch event.charactersIgnoringModifiers {
         case "d":
             if !fileIsOpen {
-                openFile("/Users/iuz/Downloads/test.txt", prefs.encoding)
+                openFile(prefs.filePath, prefs.encoding)
             }
-            displayPage(index)
+            if fileIsOpen {
+                txtContent.stringValue = bookReader.display()
+            }
         case "a":
-            if index > 1 {
-                displayPage(index - 2)
+            if !fileIsOpen {
+                openFile(prefs.filePath, prefs.encoding)
             }
+            if fileIsOpen {
+                txtContent.stringValue = bookReader.displayPrevPage()
+            }
+        case "s":
+            if !fileIsOpen {
+                break
+            }
+            txtContent.stringValue = bookReader.skipPages(skipPages: 100)
+        case "w":
+            if !fileIsOpen {
+                break
+            }
+            txtContent.stringValue = bookReader.goBackPages(backPages: 100)
+        case " ":
+            toggleWindow()
         default:
             break
+        }
+    }
+    
+    func toggleWindow() {
+        if isWindowVisible {
+            self.view.window?.orderBack(nil)
+            isWindowVisible = false
+        } else {
+            self.view.window?.orderFront(nil)
+            isWindowVisible = true
         }
     }
     
@@ -60,8 +91,7 @@ class ViewController: NSViewController {
         let data = manager.contents(atPath: path)
         if data != nil {
             bookString = String(data: data!, encoding: encoding)
-            pages = bookString.count / chars
-            prefs.pages = pages
+            bookReader.parseBookString(data: bookString)
             fileIsOpen = true
         } else {
             let alert = NSAlert()
@@ -69,6 +99,7 @@ class ViewController: NSViewController {
             alert.alertStyle = .warning
             alert.addButton(withTitle: "OK")
             alert.runModal()
+            return
         }
         
         txtContent.backgroundColor = prefs.backgroundColor
@@ -77,23 +108,16 @@ class ViewController: NSViewController {
         view.window?.backgroundColor = prefs.backgroundColor
     }
     
-    func displayPage(_ page: Int) {
-        if page * chars + chars > bookString.count {
-            txtContent.stringValue = (bookString as NSString).substring(from: page * chars)
-            return
-        }
-        self.offset = page * chars
-        var txtString: String = (bookString as NSString).substring(with: NSMakeRange(self.offset, chars))
-        txtString = txtString.regReplace(pattern: #"[ \t\r\f\v]+\n"#, with: "\n")
-        txtContent.stringValue = txtString.regReplace(pattern: #"[\n]{2,}"#, with: "\n")
-        index = page + 1
-        prefs.index = index
-    }
-    
     func initDisplay() {
         bookPath = prefs.filePath
-        chars = prefs.chars
-        index = prefs.index
+        bookReader.index = prefs.index
+        columns = prefs.columns
+        rows = prefs.rows
+        
+        let width = prefs.fontSize * CGFloat(prefs.columns) + 5
+        let height = prefs.fontSize * 1.4 * CGFloat(prefs.rows) + 5
+        
+        self.view.setFrameSize(NSSize(width: width, height: height))
     }
     
     func updateDisplay() {
@@ -105,29 +129,18 @@ class ViewController: NSViewController {
         if self.bookPath != prefs.filePath {
             self.bookPath = prefs.filePath
             self.openFile(self.bookPath, prefs.encoding)
-            self.displayPage(prefs.index)
-        }
-        
-        if chars != prefs.chars {
-            chars = prefs.chars
-            pages = bookString.count / chars
-            prefs.pages = pages
-            
-            if self.index != prefs.index {
-                self.index = prefs.index
-                displayPage(self.index)
-            } else {
-                var i = 0
-                while chars * i < self.offset {
-                    i += 1
-                }
-                self.offset = chars * i
-                self.index = i
-                txtContent.stringValue = (bookString as NSString).substring(with: NSMakeRange(self.offset, chars))
+            txtContent.stringValue = self.bookReader.displayPage(idx: prefs.index)
+        } else {
+            if columns != prefs.columns || rows != prefs.rows {
+                bookReader.parseBookString(data: bookString)
+                columns = prefs.columns
+                rows = prefs.rows
+                
+                let width = prefs.fontSize * CGFloat(prefs.columns) + 5
+                let height = prefs.fontSize * 1.4 * CGFloat(prefs.rows) + 5
+                
+                self.view.setFrameSize(NSSize(width: width, height: height))
             }
-        } else if self.index != prefs.index {
-            self.index = prefs.index
-            displayPage(self.index)
         }
     }
     

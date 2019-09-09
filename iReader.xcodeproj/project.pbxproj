@@ -15,8 +15,9 @@
 		EE0C6C9B22F95BB60017531A /* iReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0C6C9A22F95BB60017531A /* iReaderUITests.swift */; };
 		EE1BC83F231F9B77001C0CF5 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1BC83E231F9B77001C0CF5 /* Preferences.storyboard */; };
 		EE308764231E5A0A0067B322 /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE308763231E5A0A0067B322 /* PrefsViewController.swift */; };
-		EEA203A9231F59460020D768 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA203A8231F59460020D768 /* WindowController.swift */; };
 		EEA203AD231F5F510020D768 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA203AC231F5F510020D768 /* Preferences.swift */; };
+		EEB8FE6623223E27008FFB94 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB8FE6523223E27008FFB94 /* Pages.swift */; };
+		EEB8FE6823226621008FFB94 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB8FE6723226621008FFB94 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +53,9 @@
 		EE0C6C9C22F95BB60017531A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE1BC83E231F9B77001C0CF5 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		EE308763231E5A0A0067B322 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
-		EEA203A8231F59460020D768 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		EEA203AC231F5F510020D768 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		EEB8FE6523223E27008FFB94 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
+		EEB8FE6723226621008FFB94 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				EEA203AC231F5F510020D768 /* Preferences.swift */,
+				EEB8FE6523223E27008FFB94 /* Pages.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -145,7 +148,7 @@
 		EEA203B3231F60380020D768 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EEA203A8231F59460020D768 /* WindowController.swift */,
+				EEB8FE6723226621008FFB94 /* WindowController.swift */,
 				EE0C6C7E22F95BB50017531A /* ViewController.swift */,
 				EE308763231E5A0A0067B322 /* PrefsViewController.swift */,
 			);
@@ -284,8 +287,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE0C6C7F22F95BB50017531A /* ViewController.swift in Sources */,
-				EEA203A9231F59460020D768 /* WindowController.swift in Sources */,
+				EEB8FE6823226621008FFB94 /* WindowController.swift in Sources */,
 				EEA203AD231F5F510020D768 /* Preferences.swift in Sources */,
+				EEB8FE6623223E27008FFB94 /* Pages.swift in Sources */,
 				EE308764231E5A0A0067B322 /* PrefsViewController.swift in Sources */,
 				EE0C6C7D22F95BB50017531A /* AppDelegate.swift in Sources */,
 			);

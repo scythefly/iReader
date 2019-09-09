@@ -247,4 +247,16 @@ struct Preferences {
             }
         }
     }
+    
+    var columns: Int {
+        get {
+            return 30
+        }
+    }
+    
+    var rows: Int {
+        get {
+            return 12
+        }
+    }
 }

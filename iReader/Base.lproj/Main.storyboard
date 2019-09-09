@@ -688,13 +688,13 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="iReader" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titleVisibility="hidden" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="320"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <value key="minSize" type="size" width="480" height="270"/>
-                        <value key="maxSize" type="size" width="480" height="270"/>
+                        <value key="minSize" type="size" width="480" height="320"/>
+                        <value key="maxSize" type="size" width="480" height="320"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -713,16 +713,13 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="iReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ayP-C8-15G">
-                                <rect key="frame" x="-2" y="0.0" width="484" height="270"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="270" id="DY3-dt-XO7"/>
-                                    <constraint firstAttribute="width" constant="480" id="mH9-p5-b8v"/>
-                                </constraints>
-                                <textFieldCell key="cell" id="vDo-8u-w2j">
+                            <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ayP-C8-15G">
+                                <rect key="frame" x="0.0" y="2" width="480" height="316"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="charWrapping" allowsUndo="NO" id="vDo-8u-w2j">
                                     <font key="font" size="14" name="Monaco"/>
                                     <string key="title">This mechanism is useful This mechanism is useful This mechanism is useful This mechanism is useful This mechanism is useful This mechanism is useful This mechanism is useful This mechanism is useful </string>
                                     <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
@@ -730,12 +727,6 @@
                                 </textFieldCell>
                             </textField>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ayP-C8-15G" secondAttribute="bottom" id="211-Ra-1fc"/>
-                            <constraint firstItem="ayP-C8-15G" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="SO5-Yt-lwS"/>
-                            <constraint firstAttribute="trailing" secondItem="ayP-C8-15G" secondAttribute="trailing" id="V5l-h1-jtR"/>
-                            <constraint firstItem="ayP-C8-15G" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="qVI-c6-Ghc"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="txtContent" destination="ayP-C8-15G" id="Teq-MU-IuH"/>

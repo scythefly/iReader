@@ -33,6 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let windowController = preferencesWindowController {
             windowController.showWindow(nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Preferences..."), object: "common")
         }
     }
 }
